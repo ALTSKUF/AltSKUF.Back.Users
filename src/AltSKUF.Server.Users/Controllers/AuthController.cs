@@ -25,7 +25,8 @@ namespace AltSKUF.Back.Users.Controllers
                     request.ToAuthModel());
 
                 var user = await userService.GetUser(userId,
-                    [UserComponents.Inform]);
+                    [UserComponents.Inform,
+                     UserComponents.Details]);
 
                 return Ok(user.ToResponce());
             }

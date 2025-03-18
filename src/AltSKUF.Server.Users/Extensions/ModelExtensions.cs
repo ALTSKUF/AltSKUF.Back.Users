@@ -48,7 +48,8 @@ namespace AltSKUF.Back.Users.Extensions
                 Email = user.UserInform.Email,
                 UserName = user.UserInform.UserName,
                 FirstName = user.UserDetails.FirstName,
-                LastName = user.UserDetails.LastName
+                LastName = user.UserDetails.LastName,
+                Role = user.UserInform.Role
             };
         }
     }

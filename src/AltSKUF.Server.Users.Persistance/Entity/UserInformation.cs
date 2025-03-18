@@ -5,7 +5,7 @@ namespace AltSKUF.Back.Users.Persistance.Entity
 {
     [Table("UserInforms")]
     [Index(nameof(Email), IsUnique = true)]
-    public class UserInform
+    public class UserInformation
     {
         public Guid Id { get; set; }
         [Column("user_id")]

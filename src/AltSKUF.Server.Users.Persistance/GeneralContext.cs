@@ -8,7 +8,7 @@ namespace AltSKUF.Back.Users.Persistance
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserInform> UserInforms { get; set; }
+        public DbSet<UserInformation> UserInformation { get; set; }
         public DbSet<UserDetails> UserDetails { get; set; }
 
         public DbSet<UserAuthMethods> AuthMethods { get; set; }

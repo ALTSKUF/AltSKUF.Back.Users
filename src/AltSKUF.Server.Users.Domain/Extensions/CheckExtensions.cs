@@ -6,8 +6,7 @@ namespace AltSKUF.Back.Users.Domain.Extensions
 {
     public static class CheckExtensions
     {
-        public static async Task<bool> CheckEmail(GeneralContext db,
-            string email)
+        public static async Task<bool> CheckEmail(GeneralContext db, string email)
         {
             bool isUsing = false;
 

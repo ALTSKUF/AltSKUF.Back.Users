@@ -8,7 +8,7 @@ namespace AltSKUF.Back.Users.Persistance.Entity
         public Guid Id { get; set; }
 
         [Column("user_inform")]
-        public UserInform UserInform { get; set; } = default!;
+        public UserInformation UserInform { get; set; } = default!;
         [Column("user_details")]
         public UserDetails UserDetails { get; set; } = default!;
 
