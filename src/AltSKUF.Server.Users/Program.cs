@@ -17,9 +17,12 @@ Configuration.Singleton = builder.Configuration
     .GetSection("DefaultConfiguration")
     .Get<Configuration>() ?? new();
 
+Configuration.Singleton.DataBaseString = builder.Configuration["ConnectionStrings__userdb"];
+
 builder.Services
     .AddDbContext<GeneralContext>(_ =>
     {
+        Console.WriteLine("host is: "+Configuration.Singleton.DataBaseString);
         _.UseNpgsql(Configuration.Singleton.DataBaseString);
     });
 
