@@ -1,4 +1,5 @@
-﻿using AltSKUF.Back.Users.Domain.Entity;
+﻿using AltSKUF.Back.RestClient.Authentication.Entety;
+using AltSKUF.Back.Users.Domain.Entity;
 using AltSKUF.Back.Users.Domain.Entity.AddMethods;
 using AltSKUF.Back.Users.Infrastructure.Entity.Requests;
 using AltSKUF.Back.Users.Infrastructure.Entity.Responce;
@@ -44,6 +45,21 @@ namespace AltSKUF.Back.Users.Extensions
         {
             return new()
             {
+                UserId = user.Id,
+                Email = user.UserInform.Email,
+                UserName = user.UserInform.UserName,
+                FirstName = user.UserDetails.FirstName,
+                LastName = user.UserDetails.LastName,
+                Role = user.UserInform.Role
+            };
+        }
+
+        public static AuthorizationUserResponce ToAuthResponce(this User user,
+            TokensResponce tokens)
+        {
+            return new()
+            {
+                Tokens = tokens,
                 UserId = user.Id,
                 Email = user.UserInform.Email,
                 UserName = user.UserInform.UserName,

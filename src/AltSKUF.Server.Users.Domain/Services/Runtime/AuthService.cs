@@ -20,7 +20,7 @@ namespace AltSKUF.Back.Users.Domain.Services.Runtime
             EmailAuthMethod authModel = new()
             {
                 Email = options.Email,
-                Password = options.Password,
+                Password = options.Password.HashedPassword(),
             };
 
             options.User.UserAuthMethods.EmailAuthMethod = authModel;

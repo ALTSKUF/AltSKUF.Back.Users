@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AltSKUF.Back.RestClient\src\AltSKUF.Back.RestClient.csproj" />
     <ProjectReference Include="..\AltSKUF.Server.Users.Domain\AltSKUF.Back.Users.Domain.csproj" />
     <ProjectReference Include="..\AltSKUF.Server.Users.Infrastructure\AltSKUF.Back.Users.Infrastructure.csproj" />
     <ProjectReference Include="..\AltSKUF.Server.Users.Persistance\AltSKUF.Back.Users.Persistance.csproj" />
