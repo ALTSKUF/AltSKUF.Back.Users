@@ -1,0 +1,3 @@
+[submodule "src/AltSKUF.Back.RestClient"]
+	path = src/AltSKUF.Back.RestClient
+	url = https://github.com/ALTSKUF/AltSKUF.Back.RestClient.git
