@@ -1,8 +1,8 @@
-﻿using AltSKUF.Back.RestClient.Authentication.Entety;
-using AltSKUF.Back.Users.Domain.Entity;
+﻿using AltSKUF.Back.Users.Domain.Entity;
 using AltSKUF.Back.Users.Domain.Entity.AddMethods;
 using AltSKUF.Back.Users.Infrastructure.Entity.Requests;
 using AltSKUF.Back.Users.Infrastructure.Entity.Responce;
+using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication.Entety;
 using AltSKUF.Back.Users.Persistance.Entity;
 
 namespace AltSKUF.Back.Users.Extensions

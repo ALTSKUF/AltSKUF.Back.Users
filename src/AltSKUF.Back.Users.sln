@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltSKUF.Back.Users.Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltSKUF.Back.Users.Persistance", "AltSKUF.Server.Users.Persistance\AltSKUF.Back.Users.Persistance.csproj", "{A2246210-88A9-4821-A716-B0CA977F76F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltSKUF.Back.RestClient", "AltSKUF.Back.RestClient\src\AltSKUF.Back.RestClient.csproj", "{A963860C-1063-42D1-A011-3433A49F6ED0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{A2246210-88A9-4821-A716-B0CA977F76F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2246210-88A9-4821-A716-B0CA977F76F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2246210-88A9-4821-A716-B0CA977F76F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A963860C-1063-42D1-A011-3433A49F6ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A963860C-1063-42D1-A011-3433A49F6ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A963860C-1063-42D1-A011-3433A49F6ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A963860C-1063-42D1-A011-3433A49F6ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

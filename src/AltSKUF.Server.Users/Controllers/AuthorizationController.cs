@@ -1,10 +1,10 @@
-﻿using AltSKUF.Back.RestClient.Authentication;
-using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
+﻿using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
 using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.NotFoundExceptions;
 using AltSKUF.Back.Users.Domain.Interfaces;
 using AltSKUF.Back.Users.Domain.Services;
 using AltSKUF.Back.Users.Extensions;
 using AltSKUF.Back.Users.Infrastructure.Entity.Requests;
+using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
 using AltSKUF.Back.Users.Persistance.Entity;
 using AltSKUF.Back.Users.Persistance.Extensions;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,9 @@
-using AltSKUF.Back.RestClient.Authentication;
-using AltSKUF.Back.RestClient.Authentication.Runtime;
 using AltSKUF.Back.Users.Domain;
-using AltSKUF.Back.Users.Domain.Extensions;
 using AltSKUF.Back.Users.Domain.Interfaces;
 using AltSKUF.Back.Users.Domain.Services;
 using AltSKUF.Back.Users.Domain.Services.Runtime;
+using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
+using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication.Runtime;
 using AltSKUF.Back.Users.Persistance;
 using Microsoft.EntityFrameworkCore;
 

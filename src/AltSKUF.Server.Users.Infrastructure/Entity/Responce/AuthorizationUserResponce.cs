@@ -1,4 +1,4 @@
-﻿using AltSKUF.Back.RestClient.Authentication.Entety;
+﻿using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication.Entety;
 
 namespace AltSKUF.Back.Users.Infrastructure.Entity.Responce
 {
