@@ -1,5 +1,6 @@
 ﻿using AltSKUF.Back.Users.Domain.Entity;
 using AltSKUF.Back.Users.Domain.Extensions;
+using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
 using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.NotFoundExceptions;
 using AltSKUF.Back.Users.Domain.Interfaces;
 using AltSKUF.Back.Users.Persistance;
@@ -13,9 +14,8 @@ namespace AltSKUF.Back.Users.Domain.Services.Runtime
     {
         public async Task<User> CreateUser(CreateFromEmailUserModel options)
         {
-            if (await CheckExtensions
-                .CheckEmail(
-                db, options.Email)) throw new NotFoundException("user");
+                if (await CheckExtensions
+                .CheckEmail(db, options.Email)) throw new IsAvalaibleExcepion("user");
 
             User user = new()
             {

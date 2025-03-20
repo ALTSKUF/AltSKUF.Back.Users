@@ -1,11 +1,11 @@
-﻿using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
+﻿using AltSKUF.Back.Users.Domain.Extensions;
+using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
 using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.NotFoundExceptions;
 using AltSKUF.Back.Users.Domain.Interfaces;
 using AltSKUF.Back.Users.Domain.Services;
 using AltSKUF.Back.Users.Extensions;
 using AltSKUF.Back.Users.Infrastructure.Entity.Requests;
 using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
-using AltSKUF.Back.Users.Persistance.Entity;
 using AltSKUF.Back.Users.Persistance.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,13 +27,14 @@ namespace AltSKUF.Back.Users.Controllers
                 var userId = await authService.AuthFromEmail(
                     request.ToAuthModel());
 
+                authenticationClient.HttpClient.DefaultRequestHeaders.Authorization =
+                    new("Bearer", JwtExtensions.GetServicesToken());
                 var tokens = await authenticationClient
                     .AuthenticationController.GetUserTokensWithService(userId);
 
                 var user = await userService.GetUser(userId,
                     [UserComponents.Inform,
                      UserComponents.Details]);
-
 
                 return Ok(user.ToAuthResponce(tokens));
             }

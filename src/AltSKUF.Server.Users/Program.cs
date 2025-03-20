@@ -16,7 +16,7 @@ Configuration.Singleton = builder.Configuration
     .GetSection("DefaultConfiguration")
     .Get<Configuration>() ?? new();
 
-Configuration.Singleton.DataBaseString = builder.Configuration["ConnectionStrings__userdb"];
+//Configuration.Singleton.DataBaseString = builder.Configuration["ConnectionStrings__userdb"];
 
 builder.Services
     .AddDbContext<GeneralContext>(_ =>
@@ -28,8 +28,11 @@ builder.Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<IAuthenticationClient, AuthenticationClient>(_ => 
-    new(GlobalSingletons.Singletons.AuthenricationClient));
+builder.Services.AddScoped<IAuthenticationClient, AuthenticationClient>(_ =>
+    new(new()
+    {
+        BaseAddress = new(Configuration.Singleton.AuthenticationServiceAddress)
+    }));
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
