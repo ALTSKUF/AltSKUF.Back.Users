@@ -9,5 +9,6 @@ namespace AltSKUF.Back.Users.Domain.Interfaces
         Task<User> GetUser(Guid userId, List<UserComponents> userComponents);
         Task<User> GetUser(string email, List<UserComponents> userComponents);
         Task<User> CreateUser(CreateFromEmailUserModel options);
+        Task<User> EditUser(User user, EditUserOptions options);
     }
 }

@@ -1,4 +1,5 @@
-﻿using AltSKUF.Back.Users.Persistance;
+﻿using AltSKUF.Back.Users.Domain;
+using AltSKUF.Back.Users.Persistance;
 using Microsoft.EntityFrameworkCore;
 
 namespace AltSKUF.Back.Users.ServiceExtensions
@@ -10,7 +11,7 @@ namespace AltSKUF.Back.Users.ServiceExtensions
             builder.Services
                 .AddDbContext<GeneralContext>(_ =>
                 {
-                    _.UseNpgsql("Host=localhost;Port=5433;Database=userdb;Username=postgres;Password=wr3241rt");
+                    _.UseNpgsql(Configuration.Singleton.DataBaseString);
                 });
         }
     }

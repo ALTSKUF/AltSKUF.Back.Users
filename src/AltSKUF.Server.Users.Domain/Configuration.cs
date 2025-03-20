@@ -1,4 +1,7 @@
-﻿namespace AltSKUF.Back.Users.Domain
+﻿using AltSKUF.Back.Users.Domain.Entity.Configuration;
+using AltSKUF.Back.Users.Domain.Entity.Configuration.Smtp;
+
+namespace AltSKUF.Back.Users.Domain
 {
     public class Configuration
     {
@@ -8,17 +11,6 @@
         public string AuthenticationServiceAddress { get; set; } = string.Empty;
 
         public ServiceTokenOptions ServiceTokenOptions { get; set; } = new();
-    }
-
-    public class ServiceTokenOptions
-    {
-        public string Secret { get; set; } = string.Empty;
-        public string ExpirationTimeFromMinutes { get; set; } = string.Empty;
-    }
-
-    public class AuthenticationServiceOptions
-    {
-        public string AuthenticationServiceAddress { get; set; } = string.Empty;
-        public string ExpirationJwtHours { get; set; } = string.Empty;
+        public SmtpEmailOptions SmtpEmailOptions { get; set; } = new();
     }
 }

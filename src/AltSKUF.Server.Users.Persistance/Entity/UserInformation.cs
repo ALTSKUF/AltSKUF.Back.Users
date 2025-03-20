@@ -17,7 +17,7 @@ namespace AltSKUF.Back.Users.Persistance.Entity
         [Column("email")]
         public string Email { get; set; } = string.Empty;
         [Column("confirmed_email")]
-        public bool Confirmed_email { get; set; } = false;
+        public bool ConfirmedEmail { get; set; } = false;
 
         [Column("role")]
         public string Role { get; set; } = string.Empty;

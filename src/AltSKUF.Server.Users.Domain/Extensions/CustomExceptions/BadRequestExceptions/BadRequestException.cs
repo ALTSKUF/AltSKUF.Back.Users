@@ -1,13 +1,14 @@
 ﻿namespace AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions
 {
     [Serializable]
-    public abstract class BadRequestException : Exception
+    public class BadRequestException : Exception
     {
-        protected BadRequestException()
+        public BadRequestException() 
+            : base("bad_request")
         {
         }
 
-        protected BadRequestException(string? message) : base(message)
+        public BadRequestException(string? message) : base(message)
         {
         }
     }

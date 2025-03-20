@@ -16,6 +16,7 @@ namespace AltSKUF.Back.Users.Controllers
     public class AuthorizationController(
         IUserService userService,
         IAuthService authService,
+        IVerifyService verifyService,
         IAuthenticationClient authenticationClient) : Controller
     {
         [HttpGet("/Email")]
@@ -29,14 +30,11 @@ namespace AltSKUF.Back.Users.Controllers
 
                 authenticationClient.HttpClient.DefaultRequestHeaders.Authorization =
                     new("Bearer", JwtExtensions.GetServicesToken());
-                var tokens = await authenticationClient
-                    .AuthenticationController.GetUserTokensWithService(userId);
-
                 var user = await userService.GetUser(userId,
                     [UserComponents.Inform,
                      UserComponents.Details]);
 
-                return Ok(user.ToAuthResponce(tokens));
+                return Ok(userId);
             }
             catch (NotFoundException ex)
             { return NotFound(ex.Message); }
@@ -56,10 +54,40 @@ namespace AltSKUF.Back.Users.Controllers
                 user = await authService.AddMethod(
                     request.ToAddEmailMethodModel(user));
 
-                var tokens = await authenticationClient
-                    .AuthenticationController.GetUserTokensWithService(user.Id);
+                await verifyService.SendVerifyMessage(user.Id, request.Email);
 
-                return Ok(user.ToResponce());
+                return Ok(user.Id);
+            }
+            catch (NotFoundException ex)
+            { return NotFound(ex.Message); }
+            catch (BadRequestException ex)
+            { return BadRequest(ex.Message); }
+        }
+
+        [HttpGet("/Email/Verify/{userId}")]
+        public async Task<IActionResult> VerifyFromEmail(
+            [FromRoute] Guid userId,
+            [FromQuery] string code)
+        {
+            try
+            {
+                if (!verifyService.VerifyUser(userId, code))
+                    throw new BadRequestException("code_error");
+
+                var user = await userService.GetUser(userId,
+                    [UserComponents.Inform,
+                     UserComponents.Details]);
+
+                authenticationClient.HttpClient.DefaultRequestHeaders.Authorization = 
+                    new("Bearer", JwtExtensions.GetServicesToken());
+                var tokens = await authenticationClient.AuthenticationController.GetUserTokensWithService(userId);
+
+                user = await userService.EditUser(user, new()
+                {
+                    ConfirmedEmail = true
+                });
+
+                return Ok(user.ToAuthResponce(tokens));
             }
             catch (NotFoundException ex)
             { return NotFound(ex.Message); }
