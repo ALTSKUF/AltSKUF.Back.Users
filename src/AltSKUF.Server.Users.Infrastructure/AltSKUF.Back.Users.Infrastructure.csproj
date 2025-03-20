@@ -8,10 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AltSKUF.Back.RestClient\src\AltSKUF.Back.RestClient.csproj" />
+    <PackageReference Include="Refit" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

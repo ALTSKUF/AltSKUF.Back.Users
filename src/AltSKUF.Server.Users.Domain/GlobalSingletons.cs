@@ -8,4 +8,10 @@ namespace AltSKUF.Back.Users.Domain
 
         public HttpClient AuthenricationClient { get; set; } = HttpClientExtensions.InitAuthenticationClient();
     }
+
+    public class AuthHttpClient
+    {
+        public DateTime Expiration { get; set; } = DateTime.Now;
+        public HttpClient AuthenricationClient { get; set; } = HttpClientExtensions.InitAuthenticationClient();
+    }
 }

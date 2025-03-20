@@ -15,4 +15,10 @@
         public string Secret { get; set; } = string.Empty;
         public string ExpirationTimeFromMinutes { get; set; } = string.Empty;
     }
+
+    public class AuthenticationServiceOptions
+    {
+        public string AuthenticationServiceAddress { get; set; } = string.Empty;
+        public string ExpirationJwtHours { get; set; } = string.Empty;
+    }
 }
