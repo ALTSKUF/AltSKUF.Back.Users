@@ -1,17 +1,11 @@
-using AltSKUF.Back.Users.Domain;
-using AltSKUF.Back.Users.Domain.Interfaces;
-using AltSKUF.Back.Users.Domain.Services;
-using AltSKUF.Back.Users.Domain.Services.Runtime;
-using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
-using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication.Runtime;
-using AltSKUF.Back.Users.Persistance;
-using Microsoft.EntityFrameworkCore;
+using AltSKUF.Back.Users.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.UseServiceExtensions();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
