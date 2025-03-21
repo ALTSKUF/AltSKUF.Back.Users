@@ -11,24 +11,11 @@ namespace AltSKUF.Back.Users.Domain.Extensions
         {
             bool isUsing = false;
 
-            await db.AuthMethods
-                .ForEachAsync(_ =>
-                {
-                    List<AuthMethod> authMethods = [];
-                    if (_.EmailAuthMethod != null) authMethods.Add(_.EmailAuthMethod);
-                    if (_.GoogleAuthMethod != null) authMethods.Add(_.GoogleAuthMethod);
-                    if (_.VKAuthMethod != null) authMethods.Add(_.VKAuthMethod);
-                    if (_.YandexAuthMethod != null) authMethods.Add(_.YandexAuthMethod);
-
-                    foreach (var authMethod in authMethods)
-                    {
-                        if (authMethod.Email == email)
-                        {
-                            isUsing = true;
-                            break;
-                        }
-                    }
-                });
+            isUsing = await db.AuthMethods.AnyAsync(_ => 
+                (_.EmailAuthMethod != null && _.EmailAuthMethod.Email == email) ||
+                (_.GoogleAuthMethod != null && _.GoogleAuthMethod.Email == email) ||
+                (_.YandexAuthMethod != null && _.YandexAuthMethod.Email == email) ||
+                (_.VKAuthMethod != null && _.VKAuthMethod.Email == email));
 
             return isUsing;
         }

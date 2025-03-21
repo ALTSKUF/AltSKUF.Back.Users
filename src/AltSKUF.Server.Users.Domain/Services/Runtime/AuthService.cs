@@ -50,7 +50,8 @@ namespace AltSKUF.Back.Users.Domain.Services.Runtime
             var authModel = await db
                 .EmailAuthMethods
                 .Include(_ => _.UserAuthMethods)
-                .FirstOrDefaultAsync(_ => _.Email == options.Email) ?? throw new NotFoundException("auth_method");
+                .FirstOrDefaultAsync(_ => _.Email == options.Email) 
+                    ?? throw new NotFoundException("auth_method");
 
             if (HashedExtensions.VerifyPassword(options.Password, authModel.Password))
                 return authModel.UserAuthMethods.UserId;

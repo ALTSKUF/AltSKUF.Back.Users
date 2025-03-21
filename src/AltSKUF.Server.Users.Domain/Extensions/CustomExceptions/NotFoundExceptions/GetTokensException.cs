@@ -1,7 +1,6 @@
-﻿using AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.BadRequestExceptions;
-
-namespace AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.NotFoundExceptions
+﻿namespace AltSKUF.Back.Users.Domain.Extensions.CustomExceptions.NotFoundExceptions
 {
+    [Serializable]
     public class GetTokensException : NotFoundException
     {
         public GetTokensException()

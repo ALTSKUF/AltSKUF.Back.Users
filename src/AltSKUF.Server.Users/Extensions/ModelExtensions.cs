@@ -50,7 +50,8 @@ namespace AltSKUF.Back.Users.Extensions
                 UserName = user.UserInform.UserName,
                 FirstName = user.UserDetails.FirstName,
                 LastName = user.UserDetails.LastName,
-                Role = user.UserInform.Role
+                Role = user.UserInform.Role,
+                ConfirmedEmail = user.UserInform.ConfirmedEmail
             };
         }
 
@@ -65,7 +66,8 @@ namespace AltSKUF.Back.Users.Extensions
                 UserName = user.UserInform.UserName,
                 FirstName = user.UserDetails.FirstName,
                 LastName = user.UserDetails.LastName,
-                Role = user.UserInform.Role
+                Role = user.UserInform.Role,
+                ConfirmedEmail = user.UserInform.ConfirmedEmail
             };
         }
     }
