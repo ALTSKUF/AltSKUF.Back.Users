@@ -8,8 +8,8 @@ using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication.Runtime;
 using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.Extensions.Caching.Memory;
+
 
 namespace AltSKUF.Back.Users.Extensions
 {
@@ -26,7 +26,7 @@ namespace AltSKUF.Back.Users.Extensions
         private static void ReadConfiguration(this WebApplicationBuilder builder)
         {
             Configuration.Singleton = builder.Configuration
-                .GetSection("DefaultConfiguration")
+                .GetSection("ConnectionStrings")
                 .Get<Configuration>() ?? new();
 
 
@@ -47,6 +47,7 @@ namespace AltSKUF.Back.Users.Extensions
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IVerifyService, VerifyService>();
+            builder.Services.AddScoped<IMemoryCache, MemoryCache>();
         }
 
         private static void AddHttpClient(this WebApplicationBuilder builder)
