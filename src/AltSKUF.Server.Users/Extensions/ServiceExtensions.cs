@@ -28,6 +28,9 @@ namespace AltSKUF.Back.Users.Extensions
             Configuration.Singleton = builder.Configuration
                 .GetSection("DefaultConfiguration")
                 .Get<Configuration>() ?? new();
+
+
+            Console.WriteLine(Configuration.Singleton.DataBaseString);
         }
 
         private static void AddDatabase(this WebApplicationBuilder builder)
