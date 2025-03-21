@@ -55,53 +55,53 @@ namespace AltSKUF.Back.Users.Extensions
                 }));
         }
 
-        private static void AddAuth(this WebApplicationBuilder builder)
-        {
-            builder.Services.AddAuthentication()
-                .AddJwtBearer("Services", _ =>
-                {
-                    _.Audience = "AltSkuf";
-                    _.TokenValidationParameters = new()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = "AltSKUF.Back",
-                        ValidateAudience = true,
-                        ValidAudience = "AltSKUF.Back",
-                        ValidateLifetime = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(Configuration.Singleton.ServiceTokenOptions.Secret)),
-                        ValidateIssuerSigningKey = true,
-                    };
-                })
-                .AddJwtBearer("Refresh", _ =>
-                {
-                    _.Audience = "AltSkuf";
-                    _.TokenValidationParameters = new()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = "AltSKUF.Back",
-                        ValidateAudience = true,
-                        ValidAudience = "AltSKUF.Front",
-                        ValidateLifetime = true,
-                        IssuerSigningKeyResolver =
-                            (token, secutiryToken, kid, validationParameters) =>
-                                [TokensSingleton.Singleton.RefreshTokenSecret, TokensSingleton.Singleton.PreviousRefreshTokenSecret],
-                        ValidateIssuerSigningKey = true,
-                    };
-                });
+        //private static void AddAuth(this WebApplicationBuilder builder)
+        //{
+        //    builder.Services.AddAuthentication()
+        //        .AddJwtBearer("Services", _ =>
+        //        {
+        //            _.Audience = "AltSkuf";
+        //            _.TokenValidationParameters = new()
+        //            {
+        //                ValidateIssuer = true,
+        //                ValidIssuer = "AltSKUF.Back",
+        //                ValidateAudience = true,
+        //                ValidAudience = "AltSKUF.Back",
+        //                ValidateLifetime = true,
+        //                IssuerSigningKey = new SymmetricSecurityKey(
+        //                    Encoding.UTF8.GetBytes(Configuration.Singleton.ServiceTokenOptions.Secret)),
+        //                ValidateIssuerSigningKey = true,
+        //            };
+        //        })
+        //        .AddJwtBearer("Refresh", _ =>
+        //        {
+        //            _.Audience = "AltSkuf";
+        //            _.TokenValidationParameters = new()
+        //            {
+        //                ValidateIssuer = true,
+        //                ValidIssuer = "AltSKUF.Back",
+        //                ValidateAudience = true,
+        //                ValidAudience = "AltSKUF.Front",
+        //                ValidateLifetime = true,
+        //                IssuerSigningKeyResolver =
+        //                    (token, secutiryToken, kid, validationParameters) =>
+        //                        [TokensSingleton.Singleton.RefreshTokenSecret, TokensSingleton.Singleton.PreviousRefreshTokenSecret],
+        //                ValidateIssuerSigningKey = true,
+        //            };
+        //        });
 
-            builder.Services.AddAuthorizationBuilder()
-                .AddPolicy("Services", policy =>
-                {
-                    policy.AddAuthenticationSchemes("Services");
-                    policy.RequireAuthenticatedUser();
-                })
-                .AddPolicy("Refresh", policy =>
-                {
-                    policy.AddAuthenticationSchemes("Refresh");
-                    policy.RequireAuthenticatedUser();
-                });
-        }
+        //    builder.Services.AddAuthorizationBuilder()
+        //        .AddPolicy("Services", policy =>
+        //        {
+        //            policy.AddAuthenticationSchemes("Services");
+        //            policy.RequireAuthenticatedUser();
+        //        })
+        //        .AddPolicy("Refresh", policy =>
+        //        {
+        //            policy.AddAuthenticationSchemes("Refresh");
+        //            policy.RequireAuthenticatedUser();
+        //        });
+        //}
 
         private static void AddSwagger(this WebApplicationBuilder builder)
         {
