@@ -30,9 +30,8 @@ namespace AltSKUF.Back.Users.Controllers
 
                 authenticationClient.HttpClient.DefaultRequestHeaders.Authorization =
                     new("Bearer", JwtExtensions.GetServicesToken());
-                var user = await userService.GetUser(userId,
-                    [UserComponents.Inform,
-                     UserComponents.Details]);
+
+                await verifyService.SendVerifyMessage(userId, request.Email);
 
                 return Ok(userId);
             }

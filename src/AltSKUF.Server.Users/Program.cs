@@ -28,6 +28,7 @@ builder.Services
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IVerifyService, VerifyService>();
 
 builder.Services.AddScoped<IAuthenticationClient, AuthenticationClient>(_ =>
     new(new()

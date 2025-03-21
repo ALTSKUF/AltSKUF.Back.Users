@@ -29,7 +29,8 @@ namespace AltSKUF.Back.Users.Domain.Extensions
                 EnableSsl = true
             };
 
-            await smtpClient.SendMailAsync(message);
+            try { await smtpClient.SendMailAsync(message); }
+            catch { throw new Extensions.CustomExceptions.BadRequestExceptions.SmtpException(); }
         }
     }
 
