@@ -31,7 +31,7 @@ namespace AltSKUF.Back.Users.Extensions
         private static void ReadConfiguration(this WebApplicationBuilder builder)
         {
             Configuration.Singleton = builder.Configuration
-                .GetSection("DefaulOptions")
+                .GetSection("DefaultOptions")
                 .Get<Configuration>() ?? new();
 
             Console.WriteLine(Configuration.Singleton.DataBaseString);
