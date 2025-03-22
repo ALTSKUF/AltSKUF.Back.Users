@@ -53,7 +53,6 @@ namespace AltSKUF.Back.Users.Extensions
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IVerifyService, VerifyService>();
-            builder.Services.AddScoped<IMemoryCache, MemoryCache>();
         }
 
         private static void AddHttpClient(this WebApplicationBuilder builder)
