@@ -4,6 +4,5 @@
     {
         public string Secret { get; set; } = string.Empty;
         public string ExpirationTimeFromMinutes { get; set; } = string.Empty;
-
     }
 }

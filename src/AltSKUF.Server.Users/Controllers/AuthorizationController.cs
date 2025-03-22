@@ -12,14 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace AltSKUF.Back.Users.Controllers
 {
     [ApiController]
-    [Route("/Auth")]
+    [Route("Auth")]
     public class AuthorizationController(
         IUserService userService,
         IAuthService authService,
         IVerifyService verifyService,
         IAuthenticationClient authenticationClient) : Controller
     {
-        [HttpGet("/Email")]
+        [HttpGet("Email")]
         public async Task<IActionResult> AuthFromEmail(
             [FromQuery] UserEmailAuthRequest request)
         {
@@ -41,7 +41,7 @@ namespace AltSKUF.Back.Users.Controllers
             { return BadRequest(ex.Message); }
         }
 
-        [HttpPost("/Email")]
+        [HttpPost("Email")]
         public async Task<IActionResult> RegistrationFromEmail(
             [FromBody] UserEmailRegistrationRequest request)
         {

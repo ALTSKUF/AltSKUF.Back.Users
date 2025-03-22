@@ -9,6 +9,9 @@ using AltSKUF.Back.Users.Infrastructure.HttpClient.Authentication;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using AltSKUF.Back.Users.Domain.Extensions;
 
 
 namespace AltSKUF.Back.Users.Extensions
@@ -21,14 +24,15 @@ namespace AltSKUF.Back.Users.Extensions
             builder.AddDatabase();
             builder.AddHttpClient();
             builder.AddServices();
+
+            builder.AddAuth();
         }
 
         private static void ReadConfiguration(this WebApplicationBuilder builder)
         {
             Configuration.Singleton = builder.Configuration
-                .GetSection("ConnectionStrings")
+                .GetSection("DefaulOptions")
                 .Get<Configuration>() ?? new();
-
 
             Console.WriteLine(Configuration.Singleton.DataBaseString);
         }
@@ -38,7 +42,9 @@ namespace AltSKUF.Back.Users.Extensions
             builder.Services
                 .AddDbContext<GeneralContext>(_ =>
                 {
-                    _.UseNpgsql(Configuration.Singleton.DataBaseString);
+                    _.UseNpgsql(
+                        builder.Configuration.GetConnectionString("userdb")
+                        ?? Configuration.Singleton.DataBaseString);
                 });
         }
 
@@ -59,53 +65,53 @@ namespace AltSKUF.Back.Users.Extensions
                 }));
         }
 
-        //private static void AddAuth(this WebApplicationBuilder builder)
-        //{
-        //    builder.Services.AddAuthentication()
-        //        .AddJwtBearer("Services", _ =>
-        //        {
-        //            _.Audience = "AltSkuf";
-        //            _.TokenValidationParameters = new()
-        //            {
-        //                ValidateIssuer = true,
-        //                ValidIssuer = "AltSKUF.Back",
-        //                ValidateAudience = true,
-        //                ValidAudience = "AltSKUF.Back",
-        //                ValidateLifetime = true,
-        //                IssuerSigningKey = new SymmetricSecurityKey(
-        //                    Encoding.UTF8.GetBytes(Configuration.Singleton.ServiceTokenOptions.Secret)),
-        //                ValidateIssuerSigningKey = true,
-        //            };
-        //        })
-        //        .AddJwtBearer("Refresh", _ =>
-        //        {
-        //            _.Audience = "AltSkuf";
-        //            _.TokenValidationParameters = new()
-        //            {
-        //                ValidateIssuer = true,
-        //                ValidIssuer = "AltSKUF.Back",
-        //                ValidateAudience = true,
-        //                ValidAudience = "AltSKUF.Front",
-        //                ValidateLifetime = true,
-        //                IssuerSigningKeyResolver =
-        //                    (token, secutiryToken, kid, validationParameters) =>
-        //                        [TokensSingleton.Singleton.RefreshTokenSecret, TokensSingleton.Singleton.PreviousRefreshTokenSecret],
-        //                ValidateIssuerSigningKey = true,
-        //            };
-        //        });
+        private static void AddAuth(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddAuthentication()
+                .AddJwtBearer("Services", _ =>
+                {
+                    _.Audience = "AltSkuf";
+                    _.TokenValidationParameters = new()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "AltSKUF.Back",
+                        ValidateAudience = true,
+                        ValidAudience = "AltSKUF.Back",
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration.Singleton.ServiceTokenOptions.Secret)),
+                        ValidateIssuerSigningKey = true,
+                    };
+                })
+                .AddJwtBearer("Access", _ =>
+                {
+                    _.Audience = "AltSkuf";
+                    _.TokenValidationParameters = new()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "AltSKUF.Back",
+                        ValidateAudience = true,
+                        ValidAudience = "AltSKUF.Front",
+                        ValidateLifetime = true,
+                        IssuerSigningKeyResolver =
+                            (token, secutiryToken, kid, validationParameters) =>
+                                [SercretExtensions.AccessTokenSecret, SercretExtensions.PreviousAccessTokenSecret],
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
 
-        //    builder.Services.AddAuthorizationBuilder()
-        //        .AddPolicy("Services", policy =>
-        //        {
-        //            policy.AddAuthenticationSchemes("Services");
-        //            policy.RequireAuthenticatedUser();
-        //        })
-        //        .AddPolicy("Refresh", policy =>
-        //        {
-        //            policy.AddAuthenticationSchemes("Refresh");
-        //            policy.RequireAuthenticatedUser();
-        //        });
-        //}
+            builder.Services.AddAuthorizationBuilder()
+                .AddPolicy("Services", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Services");
+                    policy.RequireAuthenticatedUser();
+                })
+                .AddPolicy("Refresh", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Refresh");
+                    policy.RequireAuthenticatedUser();
+                });
+        }
 
         private static void AddSwagger(this WebApplicationBuilder builder)
         {
