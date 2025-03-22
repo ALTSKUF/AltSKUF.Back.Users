@@ -63,7 +63,7 @@ namespace AltSKUF.Back.Users.Controllers
             { return BadRequest(ex.Message); }
         }
 
-        [HttpGet("/Email/Verify/{userId}")]
+        [HttpGet("Email/Verify/{userId}")]
         public async Task<IActionResult> VerifyFromEmail(
             [FromRoute] Guid userId,
             [FromQuery] string code)
